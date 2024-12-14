@@ -19,8 +19,8 @@ QrSpy adalah aplikasi web berbasis Flask yang memungkinkan pengguna untuk mengam
 1. **Klon Repository**:
 
    ```bash
-   git clone <https://github.com/Zulkifli1409/qrspy.git>
-   cd <qrspy>
+   git clone https://github.com/Zulkifli1409/qrspy.git
+   cd qrspy
    ```
 
 2. **Instal Dependensi**:
