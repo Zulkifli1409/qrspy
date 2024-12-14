@@ -1,9 +1,5 @@
 # Alat Perekaman Foto QrSpy
 
-<p align="center">
-  <img src="https://github.com/your-username/qrspy/raw/main/logo.png" alt="QrSpy Logo" width="200">
-</p>
-
 QrSpy adalah aplikasi web berbasis Flask yang memungkinkan pengguna untuk mengambil foto langsung dari browser setiap detik. Foto yang diambil akan otomatis diunggah ke server dan disimpan di folder yang telah ditentukan. Dengan antarmuka yang bersih dan mudah digunakan, QrSpy menyediakan solusi yang efisien untuk perekaman foto secara real-time.
 
 ## Fitur
@@ -103,7 +99,3 @@ Jika ingin mengakses aplikasi ini dari jaringan luar, Anda bisa menggunakan Ngro
 Proyek ini dilisensikan di bawah Lisensi MIT. Lihat file LICENSE untuk detailnya.
 
 ---
-
-<p align="center">
-  <i>Proyek QrSpy dibuat oleh <a href="https://github.com/your-username">Your Name</a></i>
-</p>
