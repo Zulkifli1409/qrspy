@@ -1,13 +1,17 @@
-# Alat Perekaman Video dan Foto
+# Alat Perekaman Foto QrSpy
 
-Proyek ini adalah aplikasi web berbasis Flask yang memungkinkan pengguna untuk mengambil foto dan video langsung dari browser. Media yang direkam akan otomatis diunggah ke server dan disimpan di folder yang telah ditentukan.
+<p align="center">
+  <img src="https://github.com/your-username/qrspy/raw/main/logo.png" alt="QrSpy Logo" width="200">
+</p>
+
+QrSpy adalah aplikasi web berbasis Flask yang memungkinkan pengguna untuk mengambil foto langsung dari browser setiap detik. Foto yang diambil akan otomatis diunggah ke server dan disimpan di folder yang telah ditentukan. Dengan antarmuka yang bersih dan mudah digunakan, QrSpy menyediakan solusi yang efisien untuk perekaman foto secara real-time.
 
 ## Fitur
 
-- **Perekaman Media di Browser**: Pengguna dapat mengakses aplikasi ini melalui browser untuk mengambil foto dan video.
-- **Unggah Otomatis**: File media yang diambil akan diunggah secara otomatis ke server.
-- **Penyimpanan dengan Timestamp**: File disimpan dengan nama unik berdasarkan waktu saat pengambilan.
-- **Antarmuka Sederhana**: Aplikasi ini menyediakan antarmuka yang bersih dan mudah digunakan.
+- 📸 **Perekaman Foto Setiap Detik**: Pengguna dapat mengakses aplikasi ini melalui browser untuk mengambil foto setiap detik.
+- 🚀 **Unggah Otomatis**: Foto yang diambil akan diunggah secara otomatis ke server.
+- 📁 **Penyimpanan dengan Timestamp**: Foto disimpan dengan nama unik berdasarkan waktu saat pengambilan.
+- 🌟 **Antarmuka Sederhana**: Aplikasi ini menyediakan antarmuka yang bersih dan mudah digunakan.
 
 ## Prasyarat
 
@@ -29,7 +33,7 @@ Proyek ini adalah aplikasi web berbasis Flask yang memungkinkan pengguna untuk m
    pip install flask
    ```
 
-3. **Atur Direktori**: Aplikasi akan secara otomatis membuat folder bernama `captured_media` untuk menyimpan file media yang diunggah.
+3. **Atur Direktori**: Aplikasi akan secara otomatis membuat folder bernama `captured_media` untuk menyimpan foto yang diunggah.
 
 ## Penggunaan
 
@@ -39,16 +43,16 @@ Proyek ini adalah aplikasi web berbasis Flask yang memungkinkan pengguna untuk m
    python app.py
    ```
 
-2. **Akses Aplikasi**: Buka browser dan navigasikan ke `http://<server_ip>:5000/`.
+2. **Akses Aplikasi**: Buka browser dan navigasikan ke [http://<server_ip>:5000/](http://<server_ip>:5000/).
 
 3. **Izinkan Akses Kamera**: Berikan izin kepada aplikasi untuk mengakses kamera ketika diminta.
 
-4. **Ambil Media**:
+4. **Ambil Foto Setiap Detik**:
 
-   - Klik tombol untuk mulai memindai atau merekam.
-   - Foto dan video yang direkam akan diunggah ke server.
+   - Foto akan diambil secara otomatis setiap detik.
+   - Foto yang direkam akan diunggah ke server.
 
-5. **Akses Media yang Tersimpan**: File yang direkam disimpan di folder `captured_media` pada server.
+5. **Akses Foto yang Tersimpan**: Foto yang diambil disimpan di folder `captured_media` pada server.
 
 ## Struktur Proyek
 
@@ -58,25 +62,23 @@ Proyek ini adalah aplikasi web berbasis Flask yang memungkinkan pengguna untuk m
 ├── templates/
 │   └── index.html      # File HTML untuk antarmuka pengguna
 ├── static/             # (Opsional) Direktori untuk file statis
-└── captured_media/     # Direktori untuk menyimpan media yang diunggah
+└── captured_media/     # Direktori untuk menyimpan foto yang diunggah
 ```
 
 ## Cara Kerja
 
 1. Server menyajikan halaman HTML (`index.html`) yang:
-
    - Meminta izin akses kamera.
    - Menampilkan aliran video dari kamera ke browser.
-   - Mengambil foto/video dan mengunggahnya ke server.
+   - Mengambil foto setiap detik dan mengunggahnya ke server.
 
 2. Backend Flask:
-
-   - Menerima file media yang diunggah melalui endpoint `/upload`.
-   - Menyimpan file tersebut di folder `captured_media` dengan nama file yang dilengkapi timestamp.
+   - Menerima file foto yang diunggah melalui endpoint `/upload`.
+   - Menyimpan foto tersebut di folder `captured_media` dengan nama file yang dilengkapi timestamp.
 
 ## Kustomisasi
 
-- **Ubah Lokasi Penyimpanan**: Perbarui variabel `output_dir` di `app.py` untuk mengubah lokasi penyimpanan file.
+- **Ubah Lokasi Penyimpanan**: Perbarui variabel `output_dir` di `app.py` untuk mengubah lokasi penyimpanan foto.
 
 - **Tingkatkan Antarmuka**: Kustomisasi file `index.html` untuk mengubah tampilan atau menambahkan fitur tambahan.
 
@@ -96,16 +98,12 @@ Jika ingin mengakses aplikasi ini dari jaringan luar, Anda bisa menggunakan Ngro
 
 4. **Keamanan Tambahan**: Jika aplikasi ini digunakan dalam lingkungan produksi, pastikan untuk menambahkan autentikasi atau langkah keamanan lainnya.
 
-## Kontribusi
-
-Silakan fork repository ini dan kirimkan pull request untuk fitur baru, perbaikan bug, atau peningkatan lainnya.
-
 ## Lisensi
 
 Proyek ini dilisensikan di bawah Lisensi MIT. Lihat file LICENSE untuk detailnya.
 
-## Penghargaan
+---
 
-- [QuaggaJS](https://github.com/serratus/quaggaJS) untuk pemindaian barcode (jika digunakan).
-- Komunitas Flask untuk framework web Python yang andal.
-
+<p align="center">
+  <i>Proyek QrSpy dibuat oleh <a href="https://github.com/your-username">Your Name</a></i>
+</p>
